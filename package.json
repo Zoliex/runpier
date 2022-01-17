@@ -1,0 +1,26 @@
+{
+  "name": "runpier",
+  "version": "1.0.0",
+  "description": "Runpier is a backend application based on NodeJS and pm2 that can help you run code and keep an eye on system informations, logs and statistics",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zoliex/Runpier.git"
+  },
+  "keywords": [
+    "runpier",
+    "coderunner",
+    "pm2",
+    "code",
+    "runner"
+  ],
+  "author": "Enzo Coquelle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zoliex/Runpier/issues"
+  },
+  "homepage": "https://github.com/Zoliex/Runpier#readme"
+}
