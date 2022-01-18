@@ -14,9 +14,7 @@ class App {
 	async start() {
 		await this.plugins.loadFromConfig();
 
-		this.server.get('/', (req, res) => {
-			res.send('Hello World!');
-		});
+		this.server.use('/', express.static('web'));
 
 		this.server.listen(this.port, () => {
 			log.info('Express.js', `Serveur web démarré sur le port ${this.port}`)
