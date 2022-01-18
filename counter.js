@@ -14,6 +14,7 @@ function load(app) {
 	});
 
 	app.server.get('/count', (req, res) => {
+		console.log("get count")
 		res.send({ count });
 	})
 }

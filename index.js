@@ -4,7 +4,6 @@ const Plugins = require('./plugins');
 
 class App {
 	constructor() {
-
 		console.log("1")
 		this.server = express();
 		console.log("2")
@@ -23,8 +22,8 @@ class App {
 			res.send('Hello World!');
 		});
 
-		this.server.listen(80, () => {
-			console.log('Server started on port 80')
+		this.server.listen(3000, () => {
+			console.log('Server started on port 3000')
 		});
 	}
 
