@@ -1,9 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 
 let count = 0;
 
 function load(app) {
-	count = +fs.readFileSync('./plugins/counter.txt');
+	count = +fs.readFileSync(path.join(__dirname, 'counter.txt'));
+
 
 	app.server.use((req, res, next) => {
 		count++;
@@ -16,7 +18,7 @@ function load(app) {
 }
 
 function unload(app) {
-	fs.writeFileSync('./plugins/counter.txt', count.toString());
+	fs.writeFileSync(path.join(__dirname, 'counter.txt'), count.toString());
 }
 
 module.exports = {
