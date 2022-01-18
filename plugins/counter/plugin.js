@@ -15,7 +15,6 @@ function load(app) {
 	})
 }
 
-// Save request count for next time
 function unload(app) {
 	fs.writeFileSync('./plugins/counter.txt', count.toString());
 }
