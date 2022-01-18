@@ -5,16 +5,12 @@ class Plugins {
 		this.app = app;
 		this.plugins = {};
 		this.plugins_src = {};
-		console.log("finished plugin init")
 	}
 
 	async loadFromConfig(path = './plugins.json') {
 		this.plugins_src = JSON.parse(fs.readFileSync(path));
-		console.log(this.plugins_src)
 		for (let plugin in this.plugins_src) {
-			console.log("loading", plugin)
 			this.load(plugin);
-			console.log("plugin loaded")
 		}
 	}
 
