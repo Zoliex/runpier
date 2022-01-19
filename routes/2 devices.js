@@ -4,7 +4,7 @@ module.exports.page = function (app, menubar) {
             menubar
         };
 
-        res.render("index", ejs_variables);
+        res.render("devices", ejs_variables);
     });
 };
 
