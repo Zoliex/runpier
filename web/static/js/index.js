@@ -192,11 +192,11 @@ socket.on("res_list", async function (data) {
 });
 
 var console_text = document.querySelector(".logs");
-socket.on("res_getAppLogs", async function (data) {
+/*socket.on("res_getAppLogs", async function (data) {
     if (data.appName === logs_app_name) {
         console_text.innerHTML = linkify(ansi_up.ansi_to_html(data.text)).replace(/\n/g, "<br />");
     }
-});
+});*/
 
 setInterval(function () {
     socket.emit("cpuTemperature");
@@ -208,7 +208,7 @@ setInterval(function () {
     if (logs_show) {
         socket.emit("getAppLogs", logs_app_name);
     }
-}, 3000);
+}, 10000);
 
 let screen = document.querySelector(".screen");
 var autoscroll_toggle = true;
