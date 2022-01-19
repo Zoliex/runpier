@@ -43,4 +43,5 @@ app.start();
 /*
 ["exit", "SIGINT", "SIGUSR1", "SIGUSR2", "SIGTERM", "uncaughtException"].forEach(event => {
 	process.on(event, () => app.stop());
-});*/
+});
+*/

@@ -386,7 +386,6 @@ span.ripple {
 
 .container .table-container .table table tbody tr:hover td {
     background: #323546;
-    cursor: pointer;
 }
 .container .table-container .table table tbody tr.no-hover:hover td {
     background: #2a2d3e;

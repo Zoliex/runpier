@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 let count = 0;
+let count_app = 0;
 
 function load(app) {
 	count = +fs.readFileSync(path.join(__dirname, 'counter.txt'));
@@ -9,11 +10,12 @@ function load(app) {
 
 	app.server.use((req, res, next) => {
 		count++;
+		count_app++;
 		next();
 	});
 
 	app.server.get('/count', (req, res) => {
-		res.send({ count });
+		res.send({ count, count_app });
 	})
 }
 

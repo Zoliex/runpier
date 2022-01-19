@@ -77,37 +77,7 @@ var runNetwork = function anonymous(input) {
     return output;
 };
 
-function linkify(inputText) {
-    var replacedText, replacePattern1, replacePattern2, replacePattern3;
-
-    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-    replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
-
-    replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
-
-    replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-    replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
-
-    return replacedText;
-}
-
-var logs_terminal = document.querySelector(".background-info");
-
-function showLogs(appName) {
-    logs_app_name = appName;
-    logs_show = true;
-    logs_terminal.classList.toggle("active");
-}
-
-function closeLogs() {
-    logs_show = false;
-    logs_terminal.classList.toggle("active");
-    console_text.innerHTML = "Chargement des logs de l'application...";
-}
-
 var socket = io();
-var ansi_up = new AnsiUp();
 
 socket.on("res_cpuTemperature", function (data) {
     var temp = document.getElementById("temp");
@@ -185,45 +155,21 @@ socket.on("res_list", async function (data) {
             state_text = "Hors ligne";
             state_color = "#eb5757";
         }
-        html = html + `<tr onclick="showLogs('${app.name}')"><td class="icon-name"><div style="background: ${app.db_infos.icon_color};" class="icon"><i style="color: ${textColor(app.db_infos.icon_color)};" class="${app.db_infos.icon_name}"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${formatBytes(app.db_infos.folder_size, true)}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td></tr>`;
+        html = html + `<tr><td class="icon-name"><div style="background: #ff6000;\${app.db_infos.icon_color};" class="icon"><i style="\${textColor(app.db_infos.icon_color)};" class="\${app.db_infos.icon_name} fas fa-fire"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td></tr>`;
     }
     content.innerHTML = html;
-    showLogs;
 });
 
-var console_text = document.querySelector(".logs");
-/*socket.on("res_getAppLogs", async function (data) {
-    if (data.appName === logs_app_name) {
-        console_text.innerHTML = linkify(ansi_up.ansi_to_html(data.text)).replace(/\n/g, "<br />");
-    }
-});*/
-
-setInterval(function () {
+function getInfos() {
     socket.emit("cpuTemperature");
     socket.emit("currentLoad");
     socket.emit("mem");
     socket.emit("fsSize");
     socket.emit("time");
     socket.emit("list");
-    if (logs_show) {
-        socket.emit("getAppLogs", logs_app_name);
-    }
+}
+getInfos();
+
+setInterval(function () {
+    getInfos();
 }, 10000);
-
-let screen = document.querySelector(".screen");
-var autoscroll_toggle = true;
-
-let screen_scroll = window.setInterval(function () {
-    if (autoscroll_toggle) screen.scrollBy({ top: screen.scrollHeight * 1, left: 0, behavior: "smooth" });
-}, 100);
-var autoscroll_button = document.querySelector(".autoscroll");
-var autoscroll_toggle = true;
-
-autoscroll_button.addEventListener("click", (event) => {
-    autoscroll_button.classList.toggle("disabled");
-    if (autoscroll_toggle) {
-        autoscroll_toggle = false;
-    } else {
-        autoscroll_toggle = true;
-    }
-});
