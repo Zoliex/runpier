@@ -26,6 +26,8 @@
   "dependencies": {
     "colors": "^1.4.0",
     "ejs": "^3.1.6",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1",
+    "systeminformation": "^5.10.4"
   }
 }

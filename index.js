@@ -1,6 +1,7 @@
 
 const express = require('express');
 const path = require('path');
+const http = require('http');
 const Plugins = require('./plugins');
 const log = require('./lib/logger');
 
@@ -10,6 +11,7 @@ class App {
 		this.plugins = new Plugins(this);
 		this.port = port;
 		this.server.use(express.json());
+		this.http_server = http.createServer(server);
 	}
 
 	async start() {
@@ -21,7 +23,7 @@ class App {
 		
 		require("./routes/routes")(this.server);
 
-		this.server.listen(this.port, () => {
+		this.http_server.listen(this.port, () => {
 			log.info('Express.js', `Serveur web démarré sur le port ${this.port}`)
 		});
 	}
