@@ -148,17 +148,36 @@ socket.on("res_list", async function (data) {
     for (const app of data) {
         var state_text;
         var state_color;
+        console.log(app.pm2_env.status)
         if (app.pm2_env.status === "online") {
             state_text = "En ligne";
             state_color = "#27ae60";
         } else if (app.pm2_env.status === "stopped") {
             state_text = "Hors ligne";
             state_color = "#eb5757";
+        } else if (app.pm2_env.status === "stopping") {
+            state_text = "Arrêt";
+            state_color = "#f3722c";
         }
-        html = html + `<tr><td class="icon-name"><div style="background: #ff6000;\${app.db_infos.icon_color};" class="icon"><i style="\${textColor(app.db_infos.icon_color)};" class="\${app.db_infos.icon_name} fas fa-fire"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td></tr>`;
+        html = html + `<tr><td class="icon-name"><div style="background: #ff6000;\${app.db_infos.icon_color};" class="icon"><i style="\${textColor(app.db_infos.icon_color)};" class="\${app.db_infos.icon_name} fas fa-fire"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td><td><div><button onclick="pm2Start('${app.name}')" style="background: #27a24e"><i class="fas fa-play"></i></button><button onclick="pm2Stop('${app.name}')" style="background: #27a24e"><i class="fas fa-stop"></i></button><button onclick="pm2Restart('${app.name}')" style="background: #f3722c"><i class="fas fa-redo-alt"></i></button></div></td></tr>`;
     }
     content.innerHTML = html;
 });
+
+function pm2Start(appName) {
+    socket.emit("start", appName);
+    getInfos();
+};
+
+function pm2Stop(appName) {
+    socket.emit("stop", appName);
+    getInfos();
+};
+
+function pm2Restart(appName) {
+    socket.emit("restart", appName);
+    getInfos();
+};
 
 function getInfos() {
     socket.emit("cpuTemperature");
