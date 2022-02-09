@@ -160,30 +160,24 @@ socket.on("res_list", async function (data) {
             state_text = "Arrêt";
             state_color = "#f3722c";
         }
-        html = html + `<tr><td class="icon-name"><div style="background: #ff6000;\${app.db_infos.icon_color};" class="icon"><i style="\${textColor(app.db_infos.icon_color)};" class="\${app.db_infos.icon_name} fa-solid fa-fire-flame-curved"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${app.pm2_env.version}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td><td><div><button onclick="pm2Start('${app.name}')" style="background: #27a24e"><i class="fa-solid fa-play"></i></button><button onclick="pm2Stop('${app.name}')" style="background: #27a24e"><i class="fa-solid fa-stop"></i></i></button><button onclick="pm2Restart('${app.name}'); document.getElementById('icon-app-${app.pm_id}').classList.add('fa-spin')" style="background: #f3722c"><i id="icon-app-${app.pm_id}" class="fa-solid fa-arrows-rotate"></i></button></div></td></tr>`;
+        html = html + `<tr><td class="icon-name"><div style="background: #ff6000;\${app.db_infos.icon_color};" class="icon"><i style="\${textColor(app.db_infos.icon_color)};" class="\${app.db_infos.icon_name} fa-solid fa-fire-flame-curved"></i></div><span>${app.name}</span></td><td style="color: ${state_color};">${state_text}</td><td>${moment.duration(moment().diff(moment(app.pm2_env.pm_uptime))).format()}</td><td>${app.pm2_env.version}</td><td>${app.monit.cpu}%</td><td>${app.pm2_env.restart_time}</td><td><div><button onclick="pm2Start('${app.name}')" style="background: #27a24e"><i class="fa-solid fa-play"></i></button><button onclick="pm2Stop('${app.name}')" style="background: #27a24e"><i class="fa-solid fa-stop"></i></i></button><button onclick="pm2Restart('${app.name}')" style="background: #f3722c"><i class="fa-solid fa-arrows-rotate"></i></button></div></td></tr>`;
     }
     content.innerHTML = html;
 });
 
 function pm2Start(appName) {
     socket.emit("start", appName);
-    setTimeout(function () {
-        getInfos();
-    }, 2000);
+    getInfos();
 };
 
 function pm2Stop(appName) {
     socket.emit("stop", appName);
-    setTimeout(function () {
-        getInfos();
-    }, 2000);
+    getInfos();
 };
 
 function pm2Restart(appName) {
     socket.emit("restart", appName);
-    setTimeout(function () {
-        getInfos();
-    }, 2000);
+    getInfos();
 };
 
 function getInfos() {

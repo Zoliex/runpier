@@ -10,6 +10,6 @@ module.exports.page = function (app, menubar) {
 
 module.exports.infos = {
     name: "Appareils",
-    icon: "fa-brands fa-usb",
+    icon: "fa-solid fa-keyboard",
     link: "/devices"
 }
