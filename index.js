@@ -1,6 +1,7 @@
 
 const express = require('express');
-const helmet = require("helmet");
+//const helmet = require("helmet");
+const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const Plugins = require('./plugins');
@@ -12,7 +13,8 @@ class App {
 		this.plugins = new Plugins(this);
 		this.port = port;
 		this.server.use(express.json());
-		this.server.use(helmet());
+		//this.server.use(helmet());
+		this.server.use(cors())
 		this.http_server = http.createServer(this.server);
 	}
 
@@ -42,8 +44,6 @@ class App {
 
 const app = new App(5555);
 app.start();
-/*
 ["exit", "SIGINT", "SIGUSR1", "SIGUSR2", "SIGTERM", "uncaughtException"].forEach(event => {
 	process.on(event, () => app.stop());
 });
-*/

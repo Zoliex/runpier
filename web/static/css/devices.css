@@ -52,53 +52,37 @@
     flex: 1 0 21%;
     min-width: 150px;
     margin: 8px;
-    padding: 16px;
+    padding: 15px;
     border-radius: 8px;
-}
-
-.container .infos .info .icon-settings {
-    display: flex;
-    justify-content: space-between;
-}
-
-.container .infos .info .icon-settings .icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    border-radius: 8px;
-}
-
-.container .infos .info .icon-settings .settings {
-    font-size: 28px;
-    color: #9d9fa6;
-}
-
-.container .infos .info .icon-settings .settings:hover {
-    cursor: pointer;
-    color: #babcc4;
 }
 
 .container .infos .info .title-container {
     color: #fff;
     font-size: 14px;
-    margin-top: 15px;
 }
 
-.container .infos .info .loading {
-    margin-top: 15px;
+.container .infos .info .info-box {
+    padding: 8px;
     width: 100%;
-    height: 5px;
-    position: relative;
-    border-radius: 3px;
+    margin-top: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3722c20 !important;
+    color: #f3722c !important;
 }
 
-.container .infos .info .loading .loaded {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.4s ease;
+.container .infos .info .info-box p {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.container .infos .info .info-box p.info-unit {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .container .infos .info .footer {
@@ -113,12 +97,6 @@
     font-weight: 300;
     font-size: 13px;
     color: #b7b8be;
-}
-
-.container .infos .info .footer p {
-    font-weight: 400;
-    font-size: 13px;
-    color: #f3f3f4;
 }
 
 .container .table-container {
@@ -223,58 +201,6 @@
     margin-right: 16px;
     border-radius: 5px;
     font-size: 16px;
-}
-
-.info-cpu-temp .loading {
-    background: #f3332c1f !important;
-}
-
-.info-cpu-temp .loading .loaded {
-    background: #f3332c !important ;
-}
-
-.info-cpu-temp .icon-settings .icon {
-    background: #f3332c1f !important;
-    color: #f3332c !important;
-}
-
-.info-cpu-usage .loading {
-    background: #f3722c20 !important;
-}
-
-.info-cpu-usage .loading .loaded {
-    background: #f3722c !important ;
-}
-
-.info-cpu-usage .icon-settings .icon {
-    background: #f3722c20 !important;
-    color: #f3722c !important;
-}
-
-.info-ram .loading {
-    background: #ffa50020 !important;
-}
-
-.info-ram .loading .loaded {
-    background: #ffa500 !important;
-}
-
-.info-ram .icon-settings .icon {
-    background: #ffa50020 !important;
-    color: #ffa500 !important;
-}
-
-.info-disk .loading {
-    background: #91ff0020 !important;
-}
-
-.info-disk .loading .loaded {
-    background: #91ff00 !important;
-}
-
-.info-disk .icon-settings .icon {
-    background: #91ff0020 !important;
-    color: #91ff00 !important;
 }
 
 .lds-ring {

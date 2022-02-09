@@ -1,6 +1,6 @@
 {
   "name": "runpier",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Runpier is a backend application based on NodeJS and pm2 that can help you run code and keep an eye on system informations, logs and statistics",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Zoliex/Runpier#readme",
   "dependencies": {
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "helmet": "^5.0.1",
