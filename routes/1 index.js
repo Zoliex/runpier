@@ -10,6 +10,6 @@ module.exports.page = function (app, menubar) {
 
 module.exports.infos = {
     name: "Applications",
-    icon: "las la-home",
+    icon: "fa-solid fa-house-chimney",
     link: "/"
 }

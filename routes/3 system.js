@@ -9,7 +9,7 @@ module.exports.page = function (app, menubar) {
 };
 
 module.exports.infos = {
-    name: "Appareils",
-    icon: "fa-brands fa-usb",
-    link: "/devices"
+    name: "Système",
+    icon: "fa-solid fa-desktop",
+    link: "/system"
 }
