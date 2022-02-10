@@ -1,190 +1,130 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="static/css/common.css" />
-    <link rel="stylesheet" href="static/css/index.css" />
-    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
-    <script src="/static/js/moment.js" type="text/javascript"></script>
-    <script src="/static/js/moment-duration-format.js" type="text/javascript"></script>
-    <title>Runpier</title>
-    <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
-</head>
-
-<body>
-    <nav class="sidebar">
-        <div class="logo"></div>
-        <div class="items">
-            <ul class="li-items">
-                <% menubar.forEach(function(page){ %>
-                    <a href="<%= page.link %>" style="text-decoration: none">
-                        <li class="item">
-                            <i class="<%= page.icon %> item-icon"></i>
-                            <span class="item-text">
-                                <%= page.name %>
-                            </span>
-                        </li>
-                    </a>
-                    <% }); %>
-            </ul>
-        </div>
-    </nav>
-    <nav class="topbar">
-        <div class="text">
-            <h1 class="pagename">Applications</h1>
-        </div>
-        <div class="items">
-            <!--<div class="bar">
-                    <input type="text" class="searchbar" placeholder="Search" />
-                    <button class="search"><i class="las la-search"></i></button>
-                </div>-->
-            <button class="account">
-                <img src="static/assets/img/profile.png" />
-                <span class="pseudo">ZoliexDEV</span>
-                <i class="fa-solid fa-angle-down"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div class="flex-content">
-        <div class="container">
-            <div class="header">
-                <h1>Informations système</h1>
-                <!--<button class="new item">
+<%- include('../layouts/header.ejs', { scripts_name: scripts_name }) %>
+    <div class="header">
+        <h1>Informations système</h1>
+        <!--<button class="new item">
                         <i class="las la-plus"></i>&nbsp;&nbsp;Créer
                     </button>-->
+    </div>
+    <div class="infos">
+        <div class="info info-cpu-temp">
+            <div class="icon-settings">
+                <div class="icon">
+                    <i class="fa-solid fa-temperature-high"></i>
+                </div>
+                <!--<div class="settings">
+                            <i class="las la-ellipsis-v"></i>
+                        </div>-->
             </div>
-            <div class="infos">
-                <div class="info info-cpu-temp">
-                    <div class="icon-settings">
-                        <div class="icon">
-                            <i class="fa-solid fa-temperature-high"></i>
-                        </div>
-                        <!--<div class="settings">
-                            <i class="las la-ellipsis-v"></i>
-                        </div>-->
-                    </div>
-                    <div class="title-container">
-                        <span class="title">Température</span>
-                    </div>
-                    <div class="loading">
-                        <div class="loaded" id="temp_bar" style="width: 0%"></div>
-                    </div>
-                    <div class="footer">
-                        <span class="date">00:00</span>
-                        <p id="temp">0.0 °C</p>
-                    </div>
-                </div>
-
-                <div class="info info-cpu-usage">
-                    <div class="icon-settings">
-                        <div class="icon">
-                            <i class="fa-solid fa-percent"></i>
-                        </div>
-                        <!--<div class="settings">
-                            <i class="las la-ellipsis-v"></i>
-                        </div>-->
-                    </div>
-                    <div class="title-container">
-                        <span class="title">Usage CPU</span>
-                    </div>
-                    <div class="loading">
-                        <div class="loaded" id="usage_bar" style="width: 0%"></div>
-                    </div>
-                    <div class="footer">
-                        <span class="date">00:00</span>
-                        <p id="usage">0.0%</p>
-                    </div>
-                </div>
-
-                <div class="info info-ram">
-                    <div class="icon-settings">
-                        <div class="icon">
-                            <i class="fa-solid fa-memory"></i>
-                        </div>
-                        <!--<div class="settings">
-                            <i class="las la-ellipsis-v"></i>
-                        </div>-->
-                    </div>
-                    <div class="title-container">
-                        <span class="title">Usage RAM</span>
-                    </div>
-                    <div class="loading">
-                        <div class="loaded" id="ram_bar" style="width: 0%"></div>
-                    </div>
-                    <div class="footer">
-                        <span class="date">00:00</span>
-                        <p id="ram">0.00/0.00Gb</p>
-                    </div>
-                </div>
-
-                <div class="info info-disk">
-                    <div class="icon-settings">
-                        <div class="icon">
-                            <i class="fa-solid fa-hard-drive"></i>
-                        </div>
-                        <!--<div class="settings">
-                            <i class="las la-ellipsis-v"></i>
-                        </div>-->
-                    </div>
-                    <div class="title-container">
-                        <span class="title">Espace libre</span>
-                    </div>
-                    <div class="loading">
-                        <div class="loaded" id="disk_bar" style="width: 0%"></div>
-                    </div>
-                    <div class="footer">
-                        <span class="date">00:00</span>
-                        <p id="disk">0.00/0.00Gb</p>
-                    </div>
-                </div>
+            <div class="title-container">
+                <span class="title">Température</span>
             </div>
-            <div class="table-container">
-                <div class="table">
-                    <h2 class="title">Mes Applications</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Statut</th>
-                                <th>Uptime</th>
-                                <th>Version</th>
-                                <th>Utilisation CPU</th>
-                                <th>Redémarrages</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="apps-table">
-                            <tr class="no-hover">
-                                <td colspan="6">
-                                    <div class="app-loading">
-                                        <div class="app-loading-loader">
-                                            <div class="lds-ring">
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                            </div>
-                                        </div>
-                                        <div class="app-loading-text">
-                                            Chargement des applications
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="loading">
+                <div class="loaded" id="temp_bar" style="width: 0%"></div>
+            </div>
+            <div class="footer">
+                <span class="date">00:00</span>
+                <p id="temp">0.0 °C</p>
+            </div>
+        </div>
+
+        <div class="info info-cpu-usage">
+            <div class="icon-settings">
+                <div class="icon">
+                    <i class="fa-solid fa-percent"></i>
                 </div>
+                <!--<div class="settings">
+                            <i class="las la-ellipsis-v"></i>
+                        </div>-->
+            </div>
+            <div class="title-container">
+                <span class="title">Usage CPU</span>
+            </div>
+            <div class="loading">
+                <div class="loaded" id="usage_bar" style="width: 0%"></div>
+            </div>
+            <div class="footer">
+                <span class="date">00:00</span>
+                <p id="usage">0.0%</p>
+            </div>
+        </div>
+
+        <div class="info info-ram">
+            <div class="icon-settings">
+                <div class="icon">
+                    <i class="fa-solid fa-memory"></i>
+                </div>
+                <!--<div class="settings">
+                            <i class="las la-ellipsis-v"></i>
+                        </div>-->
+            </div>
+            <div class="title-container">
+                <span class="title">Usage RAM</span>
+            </div>
+            <div class="loading">
+                <div class="loaded" id="ram_bar" style="width: 0%"></div>
+            </div>
+            <div class="footer">
+                <span class="date">00:00</span>
+                <p id="ram">0.00/0.00Gb</p>
+            </div>
+        </div>
+
+        <div class="info info-disk">
+            <div class="icon-settings">
+                <div class="icon">
+                    <i class="fa-solid fa-hard-drive"></i>
+                </div>
+                <!--<div class="settings">
+                            <i class="las la-ellipsis-v"></i>
+                        </div>-->
+            </div>
+            <div class="title-container">
+                <span class="title">Espace libre</span>
+            </div>
+            <div class="loading">
+                <div class="loaded" id="disk_bar" style="width: 0%"></div>
+            </div>
+            <div class="footer">
+                <span class="date">00:00</span>
+                <p id="disk">0.00/0.00Gb</p>
             </div>
         </div>
     </div>
-    <script src="static/js/index.js"></script>
-</body>
-
-</html>
+    <div class="table-container">
+        <div class="table">
+            <h2 class="title">Mes Applications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Statut</th>
+                        <th>Uptime</th>
+                        <th>Version</th>
+                        <th>Utilisation CPU</th>
+                        <th>Redémarrages</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="apps-table">
+                    <tr class="no-hover">
+                        <td colspan="6">
+                            <div class="app-loading">
+                                <div class="app-loading-loader">
+                                    <div class="lds-ring">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="app-loading-text">
+                                    Chargement des applications
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <%- include('../layouts/footer.ejs', { scripts_name: scripts_name }) %>

@@ -1,7 +1,8 @@
 module.exports.page = function (app, menubar) {
     app.get(module.exports.infos.link, function (req, res) {
         var ejs_variables = {
-            menubar
+            menubar,
+            scripts_name: module.exports.infos.scripts_name
         };
 
         res.render("devices", ejs_variables);
@@ -11,5 +12,6 @@ module.exports.page = function (app, menubar) {
 module.exports.infos = {
     name: "Appareils",
     icon: "fa-solid fa-keyboard",
-    link: "/devices"
+    link: "/devices",
+    scripts_name: "devices"
 }
