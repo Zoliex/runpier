@@ -2,7 +2,8 @@ module.exports.page = function (app, menubar) {
     app.get(module.exports.infos.link, function (req, res) {
         var ejs_variables = {
             menubar,
-            scripts_name: module.exports.infos.scripts_name
+            scripts_name: module.exports.infos.scripts_name,
+            name: module.exports.infos.name
         };
 
         res.render("devices", ejs_variables);

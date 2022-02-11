@@ -1,6 +1,5 @@
 
 const express = require('express');
-const helmet = require("helmet");
 const path = require('path');
 const http = require('http');
 const Plugins = require('./plugins');
@@ -12,7 +11,6 @@ class App {
 		this.plugins = new Plugins(this);
 		this.port = port;
 		this.server.use(express.json());
-		this.server.use(helmet());
 		this.http_server = http.createServer(this.server);
 	}
 
