@@ -23,6 +23,7 @@ class Plugins {
 			await this.plugins[plugin].load(this.app);
 			log.info('PLugins', `Chargement de ${plugin}`);
 		} catch (e) {
+			console.log(e)
 			log.error('PLugins', `Echec du chargement de ${plugin}`)
 			this.app.stop();
 		}

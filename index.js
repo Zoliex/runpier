@@ -18,10 +18,9 @@ class App {
 		await this.plugins.loadFromConfig();
 
 		this.server.set("view engine", "ejs");
-		this.server.set("views", "./web/views/");
 		this.server.use("/static/", express.static(path.join(__dirname, "web/static")));
 
-		require("./routes/routes")(this.server);
+		require("./routes/router")(this.server);
 
 		this.http_server.listen(this.port, () => {
 			log.info('Express.js', `Serveur web démarré sur le port ${this.port}`)
@@ -40,6 +39,6 @@ class App {
 
 const app = new App(5555);
 app.start();
-["exit", "SIGINT", "SIGUSR1", "SIGUSR2", "SIGTERM", "uncaughtException"].forEach(event => {
+/*["exit", "SIGINT", "SIGUSR1", "SIGUSR2", "SIGTERM", "uncaughtException"].forEach(event => {
 	process.on(event, () => app.stop());
-});
+});*/

@@ -1,0 +1,80 @@
+<%- include('../../../web/layouts/header.ejs', { scripts_name: scripts_name, name: name }) %>
+	<div class="header">
+		<h1>Appareils USB</h1>
+	</div>
+	<div class="infos">
+		<div class="info">
+			<div class="title-container">
+				<span class="title">Appareils connectés</span>
+			</div>
+			<div class="info-box">
+				<p id="info-devices-value">0</p>
+			</div>
+			<div class="footer">
+				<span class="date">00:00</span>
+			</div>
+		</div>
+
+		<div class="info">
+			<div class="title-container">
+				<span class="title">Consommation totale</span>
+			</div>
+			<div class="info-box">
+				<p id="info-power-value">0</p>
+				<p class="info-unit">mA</p>
+			</div>
+			<div class="footer">
+				<span class="date">00:00</span>
+			</div>
+		</div>
+
+		<div class="info">
+			<div class="title-container">
+				<span class="title">Imprimantes connectées</span>
+			</div>
+			<div class="info-box">
+				<p id="info-printers-value">0</p>
+			</div>
+			<div class="footer">
+				<span class="date">00:00</span>
+			</div>
+		</div>
+	</div>
+	<div class="margin-table-container">
+		<div class="table-container">
+			<h2 class="title">Mes Appareils</h2>
+			<div class="table">
+				<table>
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Id</th>
+							<th>Vendeur</th>
+							<th>Type</th>
+							<th>Consommation max.</th>
+						</tr>
+					</thead>
+					<tbody id="devices-table">
+						<tr class="no-hover">
+							<td colspan="6">
+								<div class="app-loading">
+									<div class="app-loading-loader">
+										<div class="lds-ring">
+											<div></div>
+											<div></div>
+											<div></div>
+											<div></div>
+										</div>
+									</div>
+									<div class="app-loading-text">
+										Chargement des applications
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<%- include('../../../web/layouts/footer.ejs', { scripts_name: scripts_name }) %>

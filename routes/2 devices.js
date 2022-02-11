@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports.page = function (app, menubar) {
     app.get(module.exports.infos.link, function (req, res) {
         var ejs_variables = {
@@ -6,7 +8,7 @@ module.exports.page = function (app, menubar) {
             name: module.exports.infos.name
         };
 
-        res.render("devices", ejs_variables);
+        res.render(path.resolve("./web/views/devices.ejs"), ejs_variables);
     });
 };
 
